@@ -95,8 +95,8 @@ student_1.finished_courses.append('Git')
 student_1.grades = {'Python': [9, 10, 8]}
 
 student_2 = Student('Olga', 'Marina', 'female')
-student_2.courses_in_progress.append('java')
-student_2.finished_courses.append('git')
+student_2.courses_in_progress.append('Java')
+student_2.finished_courses.append('Git')
 student_2.grades = {'Java': [10, 10, 8]}
 
 lecturer_1 = Lecturer('Magnus', 'Carlson')
@@ -115,4 +115,4 @@ print(student_1)
 print(lecturer_1)
 print(reviewer_1)
 print(student_1 < student_2)
-print(lecturer_1 == lecturer_2)
+print(lecturer_1 > lecturer_2)
