@@ -1,3 +1,8 @@
+class Validation:
+    @staticmethod
+    def validation_grades(grade):
+        return 0 <= grade <= 10
+
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -8,6 +13,8 @@ class Student:
         self.grades = {}
 
     def rate_lecture(self, lecture, course, grade):
+        if not Validation.validation_grades(grade):
+            return 'Ошибка! Оценка за лекцию пределами диапазона от 0 до 10.'
         if isinstance(lecture, Lecturer) and course in self.courses_in_progress and course in lecture.courses_attached:
             if course in lecture.grades:
                 lecture.grades[course].append(grade)
@@ -76,6 +83,8 @@ class Lecturer(Mentor):
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
+        if not Validation.validation_grades(grade):
+            return 'Ошибка! Оценка за домашнюю работу за пределами диапазона от 0 до 10.'
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
             if course in student.grades:
                 student.grades[course].append(grade)
@@ -111,8 +120,15 @@ reviewer_1 = Reviewer('Jan', 'Nepomnyashchy')
 reviewer_1.courses_attached.append('Java')
 reviewer_1.grades = {'Java': [10, 9, 9]}
 
+result_student = reviewer_1.rate_hw(student_2, 'Java', 11)
+print(result_student)
+print('-----------')
+result_lecturer = student_1.rate_lecture(lecturer_1, 'Python', 11)
+print(result_lecturer)
+print('-----------')
 print(student_1)
+print('-----------')
 print(lecturer_1)
-print(reviewer_1)
+print('-----------')
 print(student_1 < student_2)
 print(lecturer_1 > lecturer_2)
